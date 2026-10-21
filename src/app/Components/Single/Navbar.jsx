@@ -6,6 +6,7 @@ import { Search, ChevronDown, Menu, X, Mail, Phone } from "lucide-react";
 import Navlinks, { NAV_LINKS } from "./Navlinks";
 import Image from "next/image";
 import SearchDrawer from "./SearchDrawer";
+import { assetPath } from "../../../../libs/assetPath";
 
 const LANGUAGES = ["EN"];
 
@@ -40,7 +41,7 @@ export default function Navbar() {
   onClick={closeMobileMenu}
 >
   <Image
-    src="/HomePageImages/vlnexisLogo.png"
+  src={assetPath("/HomePageImages/vlnexisLogo.png")}
     alt="Nexis"
     width={160}
     height={48}
