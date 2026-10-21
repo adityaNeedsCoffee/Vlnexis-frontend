@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "./Reusable/Button";
 import Reveal from "./Reusable/Reveal";
+import { assetPath } from "../../../libs/assetPath";
 
 /* ---------- Icons ---------- */
 const Svg = ({ children, className = "h-5 w-5", fill = "currentColor" }) => (
@@ -197,7 +198,7 @@ export default function Footer() {
           {/* Logo (made white for the dark background; remove brightness-0 invert if you have a light/colour logo) */}
           <Link href="/" className="flex shrink-0 items-center lg:pr-10">
             <Image
-              src="/HomePageImages/VLNEXISLOGO.png"
+              src={assetPath("/HomePageImages/VLNEXISLOGO.png")}
               alt="Nexis"
               width={160}
               height={48}

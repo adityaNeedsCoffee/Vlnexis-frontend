@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { assetPath } from "../../../../../libs/assetPath";
 import Link from "next/link";
 
 /* Fades + slides children up from below when they scroll into view (plays once) */
@@ -61,7 +62,7 @@ const HomeAboutSection = () => {
         <Reveal from="translate-y-24" className="md:col-span-5">
           <div className="relative h-[320px] w-full overflow-hidden rounded-2xl shadow-xl sm:h-[400px] md:h-[500px] lg:h-[540px]">
             <Image
-              src="/HomePageImages/Gemini_Generated_Image_x72gp0x72gp0x72g.png"
+              src={assetPath("/HomePageImages/Gemini_Generated_Image_x72gp0x72gp0x72g.png")}
               alt="Nexis team in a meeting"
               fill
               sizes="(min-width: 768px) 40vw, 100vw"

@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { getServiceError, useService } from "@/app/api/hooks/services/useService";
 import Reveal from "@/app/Components/Reusable/Reveal";
+import { assetPath } from "../../../../libs/assetPath";
 // apna sahi path
 
 const wrap = "mx-auto max-w-screen-2xl px-5 xl:px-8 2xl:px-12";
@@ -125,7 +126,7 @@ export default function ServiceDetail({ slug }) {
         {service.bannerImage && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={service.bannerImage}
+            src={assetPath(service.bannerImage)}
             alt=""
             className="absolute inset-0 z-0 h-full w-full object-cover"
           />

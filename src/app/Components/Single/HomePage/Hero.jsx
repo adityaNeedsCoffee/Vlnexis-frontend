@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { assetPath } from "../../../../../libs/assetPath";
 
 const textShadow = {
   textShadow: "0 2px 4px rgba(0,0,0,0.45), 0 4px 18px rgba(0,0,0,0.35)",
@@ -37,7 +38,7 @@ const Hero = () => {
       <section className="relative isolate mt-2 overflow-hidden rounded-2xl bg-grayy md:h-[430px] md:rounded-xl">
         {/* Layer 1: image (pehle -z-20 tha, ab z-0) */}
         <Image
-          src="/HomePageImages/HeroPic02.jpg"
+          src={assetPath("/HomePageImages/HeroPic02.jpg")}
           alt="Business handshake"
           fill
           priority
