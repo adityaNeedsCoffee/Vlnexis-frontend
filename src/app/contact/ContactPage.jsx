@@ -1,17 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { getContactError, useSendContact } from "../api/hooks/contact/useContact";
 
 // Yahan apni real business details daal dijiye
+const EMAIL = "support@yourdomain.com";
 const CONTACT_DETAILS = [
-  { label: "Email", value: "support@yourdomain.com", href: "mailto:support@yourdomain.com" },
   { label: "Phone", value: "+91 00000 00000", href: "tel:+910000000000" },
   { label: "Address", value: "Your street address, City, State, PIN" },
   { label: "Working hours", value: "Mon to Sat, 10:00 AM to 7:00 PM" },
 ];
 
-const EMPTY_FORM = { name: "", email: "", phone: "", message: "", website: "" };
+const EMPTY_FORM = {
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+  website: "", // honeypot
+};
 
 // Backend ke zod schema ke hisaab se
 function validate(form) {
@@ -22,9 +29,11 @@ function validate(form) {
   if (name.length < 2) errors.name = "Please enter your full name (at least 2 characters).";
   else if (name.length > 100) errors.name = "Name must be 100 characters or fewer.";
 
-  if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) errors.email = "Please enter a valid email address.";
+  if (!/^\S+@\S+\.\S+$/.test(form.email.trim()))
+    errors.email = "Please enter a valid email address.";
 
-  if (form.phone.trim().length > 30) errors.phone = "Phone number must be 30 characters or fewer.";
+  if (form.phone.trim().length > 30)
+    errors.phone = "Phone number must be 30 characters or fewer.";
 
   if (message.length < 10) errors.message = "Your message needs at least 10 characters.";
   else if (message.length > 3000) errors.message = "Message must be 3000 characters or fewer.";
@@ -32,16 +41,21 @@ function validate(form) {
   return errors;
 }
 
-// Saare inputs ka common style: simple, halka border, focus pe bluee
 const inputBase =
   "w-full rounded-lg border bg-white px-4 py-3 text-base text-blackk placeholder:text-blackk/40 transition-colors focus:border-bluee focus:outline-none focus:ring-2 focus:ring-bluee/20";
 
 // Label + input + error ek jagah
-function Field({ id, label, optional, error, children }) {
+function Field({ id, label, required, optional, error, children }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 flex items-baseline justify-between text-sm font-medium text-blackk">
-        <span>{label}</span>
+      <label
+        htmlFor={id}
+        className="mb-1.5 flex items-baseline justify-between text-sm font-medium text-blackk"
+      >
+        <span>
+          {label}
+          {required && <span className="ml-0.5 text-bluee">*</span>}
+        </span>
         {optional && <span className="text-xs font-normal text-blackk/50">Optional</span>}
       </label>
       {children}
@@ -89,48 +103,26 @@ const ContactPage = () => {
   const describe = (field) => (fieldErrors[field] ? `${field}-error` : undefined);
 
   return (
-    <main className="min-h-screen bg-grayy font-sans">
-      <div className="mx-auto max-w-5xl px-5 py-12 md:py-20 xl:px-8">
-        <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
-          {/* Left: heading + contact details */}
-          <section className="lg:col-span-2">
-            <h1 className="text-4xl font-bold tracking-tight text-blackk md:text-5xl">
-              Get in <span className="text-bluee">touch</span>
-            </h1>
-            <div className="mt-4 h-1 w-16 rounded-full bg-yelloww" />
-            <p className="mt-6 max-w-sm leading-relaxed text-blackk/70">
-              Send us a message and our team will reply within one business day.
-            </p>
+    <main className="bg-grayy px-5 py-10 font-sans text-blackk md:py-16 xl:px-8 2xl:px-12">
+      <div className="mx-auto grid max-w-[1600px] overflow-hidden rounded-3xl bg-white lg:grid-cols-2">
+        {/* Left: heading + form */}
+        <section className="px-6 py-10 sm:px-10 md:py-14 lg:px-14 xl:px-20 xl:py-20">
+          <h1 className="max-w-md text-4xl font-medium leading-[1.1] tracking-tight md:text-5xl">
+            Let&rsquo;s talk about your business in India
+          </h1>
+          <p className="mt-5 text-lg text-blackk/70">
+            You can reach us anytime via{" "}
+            <a
+              href={`mailto:${EMAIL}`}
+              className="font-medium text-bluee underline-offset-4 hover:underline focus:outline-none focus-visible:underline"
+            >
+              {EMAIL}
+            </a>
+          </p>
 
-            <dl className="mt-10 space-y-5">
-              {CONTACT_DETAILS.map((item) => (
-                <div key={item.label}>
-                  <dt className="text-xs font-medium uppercase tracking-widest text-blackk/50">{item.label}</dt>
-                  <dd className="mt-1 text-base font-medium text-blackk">
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        className="underline-offset-4 transition-colors hover:text-bluee hover:underline focus:outline-none focus-visible:text-bluee focus-visible:underline"
-                      >
-                        {item.value}
-                      </a>
-                    ) : (
-                      item.value
-                    )}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-
-          {/* Right: form */}
-          <form
-            onSubmit={handleSubmit}
-            noValidate
-            className="space-y-5 rounded-2xl bg-white p-6 shadow-sm md:p-8 lg:col-span-3"
-          >
+          <form onSubmit={handleSubmit} noValidate className="mt-10 max-w-xl space-y-5">
             <div className="grid gap-5 sm:grid-cols-2">
-              <Field id="name" label="Full name" error={fieldErrors.name}>
+              <Field id="name" label="Full name" required error={fieldErrors.name}>
                 <input
                   id="name"
                   name="name"
@@ -145,7 +137,7 @@ const ContactPage = () => {
                 />
               </Field>
 
-              <Field id="email" label="Email address" error={fieldErrors.email}>
+              <Field id="email" label="Email address" required error={fieldErrors.email}>
                 <input
                   id="email"
                   name="email"
@@ -176,32 +168,44 @@ const ContactPage = () => {
               />
             </Field>
 
-            <Field id="message" label="Message" error={fieldErrors.message}>
+            <Field id="message" label="Message" required error={fieldErrors.message}>
               <textarea
                 id="message"
                 name="message"
                 rows={5}
                 value={form.message}
                 onChange={handleChange}
-                placeholder="How can we help you?"
+                placeholder="Leave us a message..."
                 aria-invalid={!!fieldErrors.message}
                 aria-describedby={describe("message")}
                 className={`${inputBase} ${borderFor("message")} resize-y`}
               />
-              <p className="mt-1.5 text-right text-xs text-blackk/50">{form.message.length} / 3000</p>
+              <p className="mt-1.5 text-right text-xs text-blackk/50">
+                {form.message.length} / 3000
+              </p>
             </Field>
 
-            {/* Honeypot: real users ko nahi dikhna chahiye (display:none nahi, kuch bots skip kar dete hain) */}
-            <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }}>
+            {/* Honeypot: real users ko nahi dikhna chahiye */}
+            <div
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }}
+            >
               <label htmlFor="website">Website</label>
-              <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" value={form.website} onChange={handleChange} />
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={form.website}
+                onChange={handleChange}
+              />
             </div>
 
-            {/* Submit button: bluee */}
             <button
               type="submit"
               disabled={isPending}
-              className="w-full rounded-full bg-bluee px-8 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blackk focus:outline-none focus-visible:ring-2 focus-visible:ring-yelloww focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+              className="w-full rounded-lg bg-bluee px-8 py-3.5 text-base font-semibold text-white transition-colors hover:bg-blackk focus:outline-none focus-visible:ring-2 focus-visible:ring-yelloww focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isPending ? "Sending..." : "Send message"}
             </button>
@@ -220,6 +224,39 @@ const ContactPage = () => {
               )}
             </div>
           </form>
+
+          {/* Other ways to reach us */}
+          <dl className="mt-12 grid max-w-xl gap-6 border-t border-blackk/10 pt-8 sm:grid-cols-3">
+            {CONTACT_DETAILS.map((item) => (
+              <div key={item.label}>
+                <dt className="text-sm text-blackk/50">{item.label}</dt>
+                <dd className="mt-1 text-sm font-medium leading-snug">
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className="underline-offset-4 hover:text-bluee hover:underline focus:outline-none focus-visible:text-bluee focus-visible:underline"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    item.value
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        {/* Right: image (mobile par form ke upar) */}
+        <div className="relative order-first h-64 sm:h-80 lg:order-last lg:h-auto lg:min-h-[640px]">
+          <Image
+            src="/images/smilingwomen.png"
+            alt="A Nexis consultant smiling during a client meeting"
+            fill
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
         </div>
       </div>
     </main>
