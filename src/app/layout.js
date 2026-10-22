@@ -4,6 +4,7 @@ import Navbar from "./Components/Single/Navbar";
 import Footer from "./Components/Footer";
 import Provider from "./Components/Provider";
 import Breadcrumb from "./Components/Reusable/BreadCrumbs";
+import PhoneBottomNavbar from "./Components/Single/PhoneBottomNavbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
         <Navbar/>
         <Breadcrumb/>
          {children}
+         <PhoneBottomNavbar/>
          <Footer/>
          </Provider>
 
