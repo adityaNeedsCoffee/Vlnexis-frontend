@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { assetPath } from "../../../libs/assetPath";
 
 const stats = [
   { value: "30+", label: "Years of experience in Indian tax, accounting and compliance" },
@@ -53,7 +54,7 @@ export default function AboutPage() {
           {/* Banner image */}
           <div className="relative mt-2 aspect-[16/9] overflow-hidden rounded-3xl bg-blackk">
             <Image
-              src="/images/about/about-banner.jpg"
+              src={assetPath("/images/about/about-banner.jpg")}
               alt="The Nexis team at work"
               fill
               priority

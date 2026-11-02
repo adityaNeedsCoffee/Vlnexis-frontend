@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { assetPath } from "../../../../../libs/assetPath";
 import Button from "../../Reusable/Button";
 
 const hiddenStates = {
@@ -105,7 +106,7 @@ export default function PlanningEntry() {
         <Reveal direction="right" delay={200}>
           <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-xl">
             <Image
-              src="/HomePageImages/IndiaHomePage.png"
+              src={assetPath("/HomePageImages/IndiaHomePage.png")}
               alt="Planning your entry into India"
               fill
               sizes="(min-width: 768px) 50vw, 100vw"

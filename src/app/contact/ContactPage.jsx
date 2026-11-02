@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { assetPath } from "../../../libs/assetPath";
 import { getContactError, useSendContact } from "../api/hooks/contact/useContact";
 
 // Yahan apni real business details daal dijiye
@@ -250,8 +251,8 @@ const ContactPage = () => {
         {/* Right: image (mobile par form ke upar) */}
         <div className="relative order-first h-64 sm:h-80 lg:order-last lg:h-auto lg:min-h-[640px]">
           <Image
-            src="/images/smilingwomen.png"
-            alt="A Nexis consultant smiling during a client meeting"
+            src={assetPath("/images/smilingwomen.png")}
+            alt="Nexis Support Team"
             fill
             priority
             sizes="(min-width: 1024px) 50vw, 100vw"

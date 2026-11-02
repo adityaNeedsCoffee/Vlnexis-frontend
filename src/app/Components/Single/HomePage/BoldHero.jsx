@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { assetPath } from "../../../../../libs/assetPath";
 import { Anton, Mrs_Saint_Delafield } from "next/font/google";
 import Reveal from "../../Reusable/Reveal";
 import Button from "../../Reusable/Button";
@@ -73,7 +74,7 @@ export default function BoldHero() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-[72%] justify-center md:h-[92%]">
           <Reveal direction="up" delay={200} duration={1000} className="h-full">
             <Image
-              src="/HomePageImages/Professional Man in Navy Suit.png"
+              src={assetPath("/HomePageImages/Professional Man in Navy Suit.png")}
               alt="Nexis advisor"
               width={800}
               height={1000}
