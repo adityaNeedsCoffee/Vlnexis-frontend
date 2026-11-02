@@ -5,7 +5,6 @@ import Link from "next/link";
 
 import { getServiceError, useService } from "@/app/api/hooks/services/useService";
 import Reveal from "@/app/Components/Reusable/Reveal";
-import { assetPath } from "../../../../libs/assetPath";
 // apna sahi path
 
 const wrap = "mx-auto max-w-screen-2xl px-5 xl:px-8 2xl:px-12";
@@ -49,6 +48,7 @@ function LoadingState() {
           <div className="h-4 w-32 rounded bg-white/20" />
           <div className="mt-5 h-10 w-2/3 rounded bg-white/20" />
           <div className="mt-4 h-5 w-1/2 rounded bg-white/20" />
+          <p>Loading State</p>
         </div>
       </div>
       <div className={`${wrap} grid gap-5 py-10 sm:grid-cols-2 xl:py-16`}>
@@ -84,6 +84,7 @@ const darkBtn =
 
 export default function ServiceDetail({ slug }) {
   const { data, isLoading, isError, error, refetch, isFetching } = useService(slug);
+  console.log("ServiceDetail render →", { slug, isLoading, hasData: !!data });
 
   if (isLoading) return <LoadingState />;
 
@@ -126,7 +127,7 @@ export default function ServiceDetail({ slug }) {
         {service.bannerImage && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={assetPath(service.bannerImage)}
+            src={service.bannerImage}
             alt=""
             className="absolute inset-0 z-0 h-full w-full object-cover"
           />

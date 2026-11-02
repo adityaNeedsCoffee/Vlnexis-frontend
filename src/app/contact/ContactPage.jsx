@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { getContactError, useSendContact } from "../api/hooks/contact/useContact";
-import { assetPath } from "../../../libs/assetPath";
 
 // Yahan apni real business details daal dijiye
 const EMAIL = "support@yourdomain.com";
@@ -251,7 +250,7 @@ const ContactPage = () => {
         {/* Right: image (mobile par form ke upar) */}
         <div className="relative order-first h-64 sm:h-80 lg:order-last lg:h-auto lg:min-h-[640px]">
           <Image
-            src={assetPath("/images/smilingwomen.png")}
+            src="/images/smilingwomen.png"
             alt="A Nexis consultant smiling during a client meeting"
             fill
             priority

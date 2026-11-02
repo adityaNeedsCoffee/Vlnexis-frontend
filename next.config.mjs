@@ -1,7 +1,7 @@
-/** @type {import('next').NextConfig} */
+
 const nextConfig = {
   output: "export",
-  basePath: "/Vlnexis-frontend",
+ 
   images: { unoptimized: true },
   reactCompiler: true,
   env: {

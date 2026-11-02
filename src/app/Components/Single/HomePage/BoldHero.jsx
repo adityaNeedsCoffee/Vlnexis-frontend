@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { assetPath } from "../../../../../libs/assetPath";
 import { Anton, Mrs_Saint_Delafield } from "next/font/google";
 import Reveal from "../../Reusable/Reveal";
 import Button from "../../Reusable/Button";
@@ -74,7 +73,7 @@ export default function BoldHero() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-[72%] justify-center md:h-[92%]">
           <Reveal direction="up" delay={200} duration={1000} className="h-full">
             <Image
-              src={assetPath("/HomePageImages/Professional Man in Navy Suit.png")}
+              src="/HomePageImages/Professional Man in Navy Suit.png"
               alt="Nexis advisor"
               width={800}
               height={1000}
@@ -87,11 +86,11 @@ export default function BoldHero() {
         {/* Script overlay */}
         <div className="pointer-events-none absolute left-1/2 top-[40%] z-20 -translate-x-1/2 -rotate-[10deg] md:top-[42%]">
           <Reveal direction="none">
-            <span
-              className={`${script.className} script-write block whitespace-nowrap text-[22vw] leading-none text-yelloww drop-shadow-md md:text-[10vw]`}
-            >
-              Nexis
-            </span>
+          <span
+  className={`${script.className} script-write block whitespace-nowrap px-[0.2em] py-[0.05em] text-[22vw] leading-none text-yelloww drop-shadow-md md:text-[10vw]`}
+>
+  Nexis
+</span>
           </Reveal>
         </div>
 
@@ -118,20 +117,7 @@ export default function BoldHero() {
         </Button>
       </div>
 
-      {/* Chips marquee */}
-      <div className="marquee relative overflow-hidden border-t border-blackk/10 bg-white py-4 ">
-        <div className="marquee-track flex w-max ">
-          {[...chips, ...chips].map((chip, i) => (
-            <span
-              key={i}
-              aria-hidden={i >= chips.length}
-              className="mr-3 shrink-0 rounded-xl bg-bluee px-6 py-3 text-sm font-semibold text-white"
-            >
-              {chip}
-            </span>
-          ))}
-        </div>
-      </div>
+      
     </section>
   );
 }

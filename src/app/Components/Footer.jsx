@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "./Reusable/Button";
 import Reveal from "./Reusable/Reveal";
-import { assetPath } from "../../../libs/assetPath";
 
 /* ---------- Icons ---------- */
 const Svg = ({ children, className = "h-5 w-5", fill = "currentColor" }) => (
@@ -61,14 +60,14 @@ const LinkedinIcon = () => (
 const importantLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about-us" },
-  { label: "Services", href: "/services" },
+  { label: "Services", href: "/services-provided" },
   { label: "Blogs", href: "/blogs" },
   { label: "Career", href: "/career" },
   { label: "Contact Us", href: "/contact" },
 ];
 
 const supportLinks = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms & Conditions", href: "/terms" },
   { label: "Disclaimer", href: "/disclaimer" },
   { label: "FAQs", href: "/faqs" },
@@ -198,7 +197,7 @@ export default function Footer() {
           {/* Logo (made white for the dark background; remove brightness-0 invert if you have a light/colour logo) */}
           <Link href="/" className="flex shrink-0 items-center lg:pr-10">
             <Image
-              src={assetPath("/HomePageImages/VLNEXISLOGO.png")}
+              src="/HomePageImages/VLNEXISLOGO.png"
               alt="Nexis"
               width={160}
               height={48}

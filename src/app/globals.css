@@ -30,6 +30,24 @@
 }
 
 
+/* calender */
+
+
+
+.consult-dp .rdp-month_grid {
+  width: 100%;
+  max-width: none;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.consult-dp .rdp-weekday,
+.consult-dp .rdp-day {
+  width: 14.2857%;
+  text-align: center;
+}
+.consult-dp .rdp-day_button { margin: 0 auto; }
+
+
 
 /* Chips marquee */
 @keyframes marquee {
@@ -45,10 +63,10 @@
 
 /* Script text "likhne" ka effect (Reveal ke data-visible par chalta hai) */
 .script-write {
-  clip-path: inset(0 100% 0 0);
+  clip-path: inset(-30% 100% -30% -30%);
 }
 [data-visible="true"] .script-write {
-  clip-path: inset(0 0 0 0);
+  clip-path: inset(-30% -30% -30% -30%);
   transition: clip-path 1.4s ease-out 0.9s;
 }
 

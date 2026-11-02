@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { assetPath } from "../../../../../libs/assetPath";
 import Reveal from "../../Reusable/Reveal";
 import Button from "../../Reusable/Button";
 
@@ -56,7 +55,7 @@ export default function SettingUpBusiness() {
         >
           <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl shadow-xl">
             <Image
-              src={assetPath("/HomePageImages/SettingUp.jpg")}
+              src="/HomePageImages/SettingUp.png"
               alt="Setting up your business in India"
               fill
               sizes="(min-width: 768px) 45vw, 100vw"

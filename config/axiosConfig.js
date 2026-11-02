@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.API_URL || "https://vlnexis-backend.onrender.com/api",
+  baseURL: process.env.BACKEND_URL || "https://localhost:5000/api",
   withCredentials: true,
 });
 
