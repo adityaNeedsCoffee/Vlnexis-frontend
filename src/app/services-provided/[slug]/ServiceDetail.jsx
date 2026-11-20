@@ -86,6 +86,7 @@ const darkBtn =
 export default function ServiceDetail({ slug }) {
   const { data, isLoading, isError, error, refetch, isFetching } = useService(slug);
   console.log("ServiceDetail render →", { slug, isLoading, hasData: !!data });
+  console.log("ServiceDetail render → data", data);
 
   if (isLoading) return <LoadingState />;
 
