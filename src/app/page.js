@@ -6,6 +6,7 @@ import SettingUpBusiness from "./Components/Single/HomePage/SettingUp";
 import ServicesBento from "./Components/Single/HomePage/ServicesBento";
 import StatsStrip from "./Components/Single/HomePage/StatsStrip";
 import BoldHero from "./Components/Single/HomePage/BoldHero";
+import NewsComponent from "./Components/NewsComponent";
 
 export default function Home() {
   return <>
@@ -17,5 +18,6 @@ export default function Home() {
 <StatsStrip/>
 <ServicesBento/>
 <BoldHero/>
+<NewsComponent/>
   </>
 }
