@@ -287,4 +287,4 @@ export default function ServiceDetail({ slug }) {
       </section>
     </main>
   );
-}5
+}

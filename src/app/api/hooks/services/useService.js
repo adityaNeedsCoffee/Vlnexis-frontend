@@ -1,11 +1,10 @@
 "use client";
 
-// hooks/useServices.js
-import { useQuery } from "@tanstack/react-query";
+// hooks/useService.js
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { serviceKeys } from "../../../../../libs/queryKeys";
 import { serviceService } from "../../services/servicesService";
-
 
 const FIVE_MINUTES = 5 * 60 * 1000;
 
@@ -34,6 +33,37 @@ export function useService(slug) {
     queryFn: () => serviceService.getBySlug(slug),
     enabled: Boolean(slug),
     staleTime: FIVE_MINUTES,
+  });
+}
+
+/** Category edit ke liye mutation */
+export function useUpdateService() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ slug, payload }) => serviceService.update(slug, payload),
+    onSuccess: (updated, { slug }) => {
+      queryClient.invalidateQueries({ queryKey: serviceKeys.detail(slug) });
+      if (updated?.slug && updated.slug !== slug) {
+        queryClient.invalidateQueries({ queryKey: serviceKeys.detail(updated.slug) });
+      }
+      queryClient.invalidateQueries({ queryKey: serviceKeys.list() });
+      queryClient.invalidateQueries({ queryKey: serviceKeys.summaries() });
+    },
+  });
+}
+
+/** Sub-service item edit ke liye mutation */
+export function useUpdateServiceItem() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ slug, itemSlug, payload }) =>
+      serviceService.updateItem(slug, itemSlug, payload),
+    onSuccess: (_, { slug }) => {
+      queryClient.invalidateQueries({ queryKey: serviceKeys.detail(slug) });
+      queryClient.invalidateQueries({ queryKey: serviceKeys.list() });
+    },
   });
 }
 
