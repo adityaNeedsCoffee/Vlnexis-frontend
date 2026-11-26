@@ -12,3 +12,9 @@ export const serviceKeys = {
   detail: (slug) => [...serviceKeys.all, "detail", slug],
 };
  
+
+export const userKeys = {
+  all: ["users"],
+  me: () => [...userKeys.all, "me"],
+  list: () => [...userKeys.all, "list"],
+};
