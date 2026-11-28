@@ -35,4 +35,17 @@ export const userService = {
     const response = await apiClient.get("/users/me");
     return response.data.data;
   },
+
+
+
+    createAdmin: async ({ name, email, password }) => {
+    const response = await apiClient.post("/users/admin/create", {
+      name,
+      email,
+      password,
+    });
+    return response.data.data;
+  },
 };
+
+

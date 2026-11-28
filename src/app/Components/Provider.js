@@ -8,6 +8,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 
 import { getQueryClient } from '../../../libs/get-query-client';
 import { getPersister } from '../../../libs/persister';
+import { ToastContainer } from 'react-toastify';
 
 export default function Provider({ children }) {
   const queryClient = getQueryClient();
@@ -19,6 +20,8 @@ export default function Provider({ children }) {
     <>
       {children}
       <ReactQueryDevtools initialIsOpen={false} />
+          <ToastContainer position="top-right" autoClose={3000} />
+
     </>
   );
 
